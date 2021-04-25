@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
+</h:head>
+<h:body>
+    <div class="ui-fluid">
+        <h:form id="formLogin">
+            <p:growl id="growl"/>
+            <p:panel id="pnlLogin" header="Inicio de sesión"  style="text-align:center">
+            <p:graphicImage name="images/person.png" width="15%"  style="text-align:center"/>
+            <p:panelGrid id="pnlGridLogin" 
+                    columns="2"
+                 columnClasses="ui-grid-col-3,ui-grid-col-9"
+                 layout="grid"
+                 styleClass="showcase-text-align-center ui-panelgrid-blank ui-fluid"
+                 style="border:0px none; background-color:transparent;" >
+              <p:outputLabel value="Usuario: " styleClass="coloText"
+                                for="txtUsuario" style="float: left"></p:outputLabel>
+              <p:inputText id="txtUsuario" value="#{loginController.usuario}"
+                                required="true" requiredMessage="El usuario es requerido"></p:inputText>
+              <p:outputLabel value="Clave: " styleClass="coloText" for="txtClave" style="float: left"></p:outputLabel>
+              <p:password id="txtClave" value="#{loginController.password}"
+                        required="true" requiredMessage="La clave es requerida"></p:password>
+              <p:outputLabel></p:outputLabel>
+              <p:commandButton value="Entrar" action="#{loginController.ingresar}"
+                        update="pnlGridLogin,growl"></p:commandButton>
+            </p:panelGrid>
+            </p:panel>
+        </h:form>
+    </div>
+</h:body>
+</html>
