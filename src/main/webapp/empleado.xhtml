@@ -6,25 +6,23 @@
     <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
 </h:head>
 <h:body>
+    <p:outputLabel value="Bienvenido #{sessionController.usuarioDTO.usuario} a la pantalla de empleados"></p:outputLabel>
     <div class="card">
     <h:form id="form">
-        <p:dataTable id="tblEmpleados" var="empleado" value="#{empleadoController.empleados}" rowKey="#{empleado.id}"
-                     selection="#{dtContextMenuView.selectedEmpleado}" selectionMode="single" paginator="true" rows="10"
+        <p:commandButton value="Cerrar sesión" action="#{sessionClosedController.cerrarSession}"></p:commandButton>
+        <p:dataTable id="tblEmpleados" var="empleado" value="#{empleadoController.empleados}" paginator="true" rows="10"
                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                     currentPageReportTemplate="{startRecord} a {endRecord} (Total: {totalRecords})"
-                     rowsPerPageTemplate="5,10,15" emptyMessage="No se encontraron registros"
+                     currentPageReportTemplate="{startRecord} a {endRecord} (Total: {totalRecords})" reflow="true"
+                     rowsPerPageTemplate="5,10,15" emptyMessage="No se encontraron registros" filteredValue="#{empleadoController.empleadoFiltrado}"
                      paginatorPosition="both"
                      >
+                     <!--  rowKey="#{empleado.id}"
+                     selection="#{dtContextMenuView.selectedEmpleado}" selectionMode="single"  -->
             <f:facet name="header">
                 Lista de empleados
             </f:facet>
                 <f:facet name="{Exporters}">
                     <div style="float: right; padding-top: 5px;">
-                        <h:commandLink>
-                            <p:graphicImage name="images/excel.png" width="24" />
-                            <p:dataExporter type="xls" target="tblEmpleados" fileName="ReporteEmpleados" />
-                        </h:commandLink>
-
                         <h:commandLink>
                             <p:graphicImage name="images/xlsx.png" width="24" />
                             <p:dataExporter type="xlsxstream" target="tblEmpleados" fileName="ReporteEmpleados" />
@@ -43,12 +41,6 @@
                         <h:commandLink>
                             <p:graphicImage name="images/xml.png" width="24" />
                             <p:dataExporter type="xml" target="tblEmpleados" fileName="ReporteEmpleados" />
-                        </h:commandLink>
-
-                        <h:commandLink>
-                            <p:graphicImage name="images/keyboardpencil.png" width="24" />
-                            <p:dataExporter type="text" target="tblEmpleados" fileName="ReporteEmpleados"
-                                exporter="#{dataExporterView.textExporter}" />
                         </h:commandLink>
                     </div>
                 </f:facet>
